@@ -1,15 +1,16 @@
+
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2020 ImNoOSRS <https://github.com/ImNoOSRS>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer.
+ *	list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ *	this list of conditions and the following disclaimer in the documentation
+ *	and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -23,11 +24,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.1.0"
+version = "0.0.2"
 
-project.extra["PluginProvider"] = "MasterKenth"
-project.extra["PluginName"] = "Discord Rare Drop Notificater"
-project.extra["PluginDescription"] = "Sends a detailed notification via Discord webhooks whenever you get a rare/unique drop."
+project.extra["PluginName"] = "Achievement Discord Notifier"
+project.extra["PluginDescription"] = "Notify discord when you do something awesome"
+project.extra["PluginProvider"] = "tha23rd"
 
 dependencies {
 

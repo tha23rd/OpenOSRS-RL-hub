@@ -61,11 +61,11 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.NpcLootReceived;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.loottracker.LootReceived;
+
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.game.ItemStack;
-import net.runelite.http.api.loottracker.LootRecordType;
+
 import okhttp3.HttpUrl;
 import org.pf4j.Extension;
 
@@ -139,41 +139,41 @@ public class DiscordRareDropNotificaterPlugin extends Plugin
 				});
 	}
 
-	@Subscribe
-	public void onLootReceived(LootReceived lootReceived)
-	{
-		if (lootReceived.getType() != LootRecordType.EVENT)
-		{
-			// Only process EVENTS such as Barrows, CoX etc.
-			// For NPCs onNpcLootReceived receives more information and is used instead.
-			return;
-		}
-
-		Collection<ItemStack> items = lootReceived.getItems();
-		List<CompletableFuture<Boolean>> futures = new ArrayList<CompletableFuture<Boolean>>();
-		for (ItemStack item : items)
-		{
-			ItemDefinition comp = itemManager.getItemDefinition(item.getId());
-			if (!shouldBeIgnored(comp.getName()))
-			{
-				futures.add(processItemRarityEvent(lootReceived.getName(), item.getId(), item.getQuantity()));
-			}
-		}
-
-		CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
-				.thenAccept(_v -> sendScreenshotIfSupposedTo()).exceptionally(e ->
-				{
-					log.error(String.format("onLootReceived error: %s", e.getMessage()), e);
-					log.error(String.format("event %s items %s", lootReceived.getName(),
-							lootReceived.getItems().stream().map(i -> "" + i.getId()).reduce("", (p, c) -> p + ", " + c)));
-					return null;
-				});
-		if (futures.size() > 0)
-		{
-			CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
-					.thenAccept(_v -> sendScreenshotIfSupposedTo());
-		}
-	}
+//	@Subscribe
+//	public void onLootReceived(LootReceived lootReceived)
+//	{
+//		if (lootReceived.getType() != LootRecordType.EVENT)
+//		{
+//			// Only process EVENTS such as Barrows, CoX etc.
+//			// For NPCs onNpcLootReceived receives more information and is used instead.
+//			return;
+//		}
+//
+//		Collection<ItemStack> items = lootReceived.getItems();
+//		List<CompletableFuture<Boolean>> futures = new ArrayList<CompletableFuture<Boolean>>();
+//		for (ItemStack item : items)
+//		{
+//			ItemDefinition comp = itemManager.getItemDefinition(item.getId());
+//			if (!shouldBeIgnored(comp.getName()))
+//			{
+//				futures.add(processItemRarityEvent(lootReceived.getName(), item.getId(), item.getQuantity()));
+//			}
+//		}
+//
+//		CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
+//				.thenAccept(_v -> sendScreenshotIfSupposedTo()).exceptionally(e ->
+//				{
+//					log.error(String.format("onLootReceived error: %s", e.getMessage()), e);
+//					log.error(String.format("event %s items %s", lootReceived.getName(),
+//							lootReceived.getItems().stream().map(i -> "" + i.getId()).reduce("", (p, c) -> p + ", " + c)));
+//					return null;
+//				});
+//		if (futures.size() > 0)
+//		{
+//			CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
+//					.thenAccept(_v -> sendScreenshotIfSupposedTo());
+//		}
+//	}
 
 	@Subscribe
 	public void onChatMessage(ChatMessage event)
